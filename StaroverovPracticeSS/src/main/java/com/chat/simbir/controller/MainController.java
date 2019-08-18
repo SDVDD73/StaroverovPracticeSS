@@ -2,11 +2,10 @@ package com.chat.simbir.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 @Controller
 public class MainController {
@@ -44,5 +43,11 @@ public class MainController {
         request.getSession(true).invalidate();
 
         return "redirect:/login";
+    }
+
+    @RequestMapping(path = "/room/{roomid}")
+    @ResponseBody
+    public String roomtest(@PathVariable Integer roomid){
+        return "Hello" + roomid;
     }
 }

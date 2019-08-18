@@ -2,11 +2,16 @@ package com.chat.simbir.model.entity;
 
 import java.awt.*;
 
+
+
+
+
 public class ChatMessage {
 
     private MessageType type;
     private String content;
     private String sender;
+    private Roles role;
 
     public enum MessageType{
         CHAT, JOIN, LEAVE
@@ -35,4 +40,16 @@ public class ChatMessage {
     public void setSender(String sender) {
         this.sender = sender;
     }
+};
+
+
+enum Roles{
+    Admin,
+    User,
+    Moderator,
+    Delete;
 }
+
+
+
+

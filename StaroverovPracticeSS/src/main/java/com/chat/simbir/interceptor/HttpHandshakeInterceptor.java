@@ -11,6 +11,11 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+/**
+ * Interceptor for WebSocket handshake requests.
+ * Can be used to inspect the handshake request and response as well as
+ * to pass attributes to the target WebSocketHandler.
+*/
 
 @Component
 public class HttpHandshakeInterceptor  implements HandshakeInterceptor {
