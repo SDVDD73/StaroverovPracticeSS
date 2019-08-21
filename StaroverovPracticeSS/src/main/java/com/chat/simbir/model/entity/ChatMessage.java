@@ -11,7 +11,7 @@ public class ChatMessage {
     private MessageType type;
     private String content;
     private String sender;
-    private Roles role;
+    private RoleEnum role;
 
     public enum MessageType{
         CHAT, JOIN, LEAVE
@@ -43,12 +43,7 @@ public class ChatMessage {
 };
 
 
-enum Roles{
-    Admin,
-    User,
-    Moderator,
-    Delete;
-}
+
 
 
 
