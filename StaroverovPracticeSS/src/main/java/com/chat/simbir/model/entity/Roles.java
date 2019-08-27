@@ -7,20 +7,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Room {
+@AllArgsConstructor
+public class Roles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
-    @Column(name = "room_name")
+    @Column(name = "role_name")
+    @Enumerated(EnumType.STRING)
     @NonNull
-    private String roomName;
+    private Role role;
 
-    @NonNull
-    private boolean enable;
 }
-

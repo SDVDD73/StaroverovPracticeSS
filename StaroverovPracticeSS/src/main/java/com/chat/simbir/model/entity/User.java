@@ -1,8 +1,7 @@
 package com.chat.simbir.model.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,37 +10,30 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
+@Table(name = "usr")
 @Setter
 @Getter
-@Table(name = "usr")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
+    @NonNull
     private String username;
 
+    @NonNull
     private String password;
 
+    @NonNull
     private boolean enable;
 
-    public User(){}
-
-    public User(String username, String encrypted_password, boolean enable) {
-        this.username = username;
-        this.password = encrypted_password;
-        this.enable = enable;
-    }
-
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return null; //Если указать getRoles() автоматически подхватывать роли нужные для Spring Securritu и он сам будет их обрабатывать и давать доступ к задекларированныи в Security конфинге  страницам сайта
     }
 
     @Override

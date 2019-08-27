@@ -1,31 +1,40 @@
 package com.chat.simbir.model.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    @NonNull
+    private User userId;
 
+    @NonNull
     private String text;
 
+    // @Temporal(TemporalType.TIMESTAMP)
+    @NonNull
     private Timestamp time;
 
+    @NonNull
     private boolean enable;
 
-    @Column(name = "room_id")
-    private Integer roomId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "room_id")
+    @NonNull
+    private Room room;
 
-    public Message(){}
 }
