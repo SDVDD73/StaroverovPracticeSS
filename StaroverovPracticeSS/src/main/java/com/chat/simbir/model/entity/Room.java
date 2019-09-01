@@ -15,7 +15,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
     @Column(name = "room_name")
     @NonNull
     private String roomName;

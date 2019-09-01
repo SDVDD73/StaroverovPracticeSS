@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" >
 <head>
     <title>Логин</title>
-   <!-- <link rel="stylesheet" href="/css/main.css" />-->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 <body>
 <div id="login-container">
@@ -13,13 +13,12 @@
         Вы вышли из системы.
     </div>
     <form id="login" th:action="@{/login}" method="post">
-        <div><label> Логин : <input type="text" name="username"/> </label></div>
-        <div><label> Пароль: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Вход"/></div>
+        <div th:insert="~{parts/loginAndRegistration :: entryField}"></div>
     </form>
-<a th:href = "@{/registration}">Регистрация</a>
-<a th:href = "@{/}">На домашнюю</a>
+    <a th:href="@{/registration}">Регистрация</a>
+    <a th:href="@{/}">На домашнюю</a>
 </div>
+<div th:insert="~{parts/footer :: copy}"></div>
 </body>
 </html>
 

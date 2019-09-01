@@ -12,7 +12,7 @@ var username = null;
 var currentSubscription;
 var topic = null;
 var roomId = null;
-var roomInput = roomIdDisplay.textContent;
+var roomInput = 5; //TODO Как раз то самое название комнаты сейчас стоит жестко 5, потом разобраться как можно выковорить адресс со странички и ег опередать
 
 
 
@@ -31,14 +31,14 @@ connect();
 
 // Leave the current room and enter a new one.
 function enterRoom(newRoomId) {
-  //  Cookies.set('roomId', newRoomId);
+    //  Cookies.set('roomId', newRoomId);
     roomIdDisplay.textContent = newRoomId;
     topic = `/app/chat/${newRoomId}`;
 
     if (currentSubscription) {
         currentSubscription.unsubscribe();//TODO пока хрен знает для чего это
     }
-    currentSubscription = stompClient.subscribe(`/channel/${newRoomId}`, onMessageReceived);
+    currentSubscription = stompClient.subscribe(`/channel/${roomId}`, onMessageReceived);
 
     stompClient.send(`${topic}/addUser`,
         {},
@@ -49,7 +49,6 @@ function enterRoom(newRoomId) {
 
 function onConnected() {
     enterRoom(roomInput);
-    connectingElement.classList.add("hidden")
 }
 
 

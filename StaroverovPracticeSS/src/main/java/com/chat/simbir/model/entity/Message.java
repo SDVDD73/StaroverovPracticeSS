@@ -23,9 +23,10 @@ public class Message {
     private User userId;
 
     @NonNull
+    @Column(length = 2048)
     private String text;
 
-    // @Temporal(TemporalType.TIMESTAMP)
+    //\\ @Temporal(TemporalType.TIMESTAMP)
     @NonNull
     private Timestamp time;
 

@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
-public enum Role  implements GrantedAuthority {
+public enum Role implements GrantedAuthority {
     USER,
     ADMIN,
     MODERATOR,

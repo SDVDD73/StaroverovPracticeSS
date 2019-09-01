@@ -12,8 +12,7 @@ import java.util.Map;
 public class HomeUserController {
 
     @GetMapping("/homeUser")
-    public String goHomeUser(Map<String, String> model,
-                             @AuthenticationPrincipal User user) {
+    public String goHomeUser(Map<String, String> model, @AuthenticationPrincipal User user) {
 
 
             model.put("username", "Добро пожаловать: " + user.getUsername());

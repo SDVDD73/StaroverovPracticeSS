@@ -1,13 +1,13 @@
 package com.chat.simbir.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "room_user_role")
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomUserRole {

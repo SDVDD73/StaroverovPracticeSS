@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Spring Security Example </title>
+    <title>Регистриция</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
+
 <body>
-Регистрация
-<a th:if="${message}"><span th:text="${message}"> XXX </span></a>
-<form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Зарегистрироваться"/></div>
+<div id="login-container">
+    Регистрация
+    <a th:if="${message}"><span th:text="${message}"> XXX </span></a>
+    <form id="login" th:action="@{/registration}" method="post">
+        <div th:insert="~{parts/loginAndRegistration :: entryField}"></div>
+    </form>
     <div>
-        <a th:href = "@{/login}">Логин</a>
+        <a th:href="@{/login}">Залогинитьтся</a>
+        <a th:href="@{/}">На домашнюю</a>
     </div>
-</form>
+</div>
+<div th:insert="~{parts/footer :: copy}"></div>
 </body>
 </html>

@@ -7,14 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Set;
 
 @Entity
 @Table(name = "usr")
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -55,4 +54,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isEnable();
     }
+
 }

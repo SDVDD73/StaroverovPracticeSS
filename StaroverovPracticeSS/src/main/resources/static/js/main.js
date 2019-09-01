@@ -5,9 +5,16 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('#connecting');
+var roomIdDisplay = document.querySelector('#room-id-display');
 
 var stompClient = null;
 var username = null;
+var currentSubscription;
+var topic = null;
+var roomId = null;
+var roomInput = roomIdDisplay.textContent;
+
+
 
 
 function connect() {
@@ -22,17 +29,27 @@ function connect() {
 // Connect to WebSocket Server.
 connect();
 
-function onConnected() {
-    // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
+// Leave the current room and enter a new one.
+function enterRoom(newRoomId) {
+  //  Cookies.set('roomId', newRoomId);
+    roomIdDisplay.textContent = newRoomId;
+    topic = `/app/chat/${newRoomId}`;
 
-    // Tell your username to the server
-    stompClient.send("/app/chat.addUser",
+    if (currentSubscription) {
+        currentSubscription.unsubscribe();//TODO пока хрен знает для чего это
+    }
+    currentSubscription = stompClient.subscribe(`/channel/${newRoomId}`, onMessageReceived);
+
+    stompClient.send(`${topic}/addUser`,
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
-    )
+    );
+}
 
-    connectingElement.classList.add('hidden');
+
+function onConnected() {
+    enterRoom(roomInput);
+    connectingElement.classList.add("hidden")
 }
 
 
@@ -50,8 +67,8 @@ function sendMessage(event) {
             content: messageInput.value,
             type: 'CHAT'
         };
-        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-        messageInput.value = '';
+        stompClient.send(`${topic}/sendMessage`, {}, JSON.stringify(chatMessage));//send message to adress
+        messageInput.value = '';//clear field of message
     }
     event.preventDefault();
 }

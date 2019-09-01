@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
 </head>
 <body>
 <div>
@@ -14,6 +15,6 @@
 <div>
 <a th:href ="@{/publicChat}">Публичный чат</a>
 </div>
-
+<div th:insert="~{parts/footer :: copy}"></div>
 </body>
 </html>

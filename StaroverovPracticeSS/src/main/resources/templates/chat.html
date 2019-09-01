@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Чат SS</title>
-    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Чат SS</title>
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
 
     <!-- https://cdnjs.com/libraries/sockjs-client -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
@@ -22,6 +22,7 @@
             </form>
         </div>
         <h3>Чат SS</h3>
+        <h2>Комната [<span id="room-id-display" th:utext="${roomId}"></span>]</h2>
     </div>
 
     <hr/>
@@ -39,6 +40,6 @@
 </div>
 
 <script th:src="@{/js/main.js}"></script>
-
+<!--<div th:insert="~{parts/footer :: copy}"></div>-->
 </body>
 </html>
