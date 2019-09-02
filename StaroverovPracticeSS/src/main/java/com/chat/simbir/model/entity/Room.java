@@ -3,6 +3,7 @@ package com.chat.simbir.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,5 +22,12 @@ public class Room {
 
     @NonNull
     private boolean enable;
+
+    @OneToMany(targetEntity = Message.class, mappedBy = "room", orphanRemoval = false, fetch = FetchType.LAZY)
+    private Set<Message> messages;
+
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "room", orphanRemoval = false, fetch = FetchType.LAZY)
+    private Set<RoomUserRole> roomUserRoles;
+
 }
 

@@ -3,6 +3,7 @@ package com.chat.simbir.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,5 +20,9 @@ public class Roles {
     @Enumerated(EnumType.STRING)
     @NonNull
     private Role role;
+
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "role", orphanRemoval = false, fetch = FetchType.LAZY)
+    protected Set<RoomUserRole> roomUserRoles;
+
 
 }

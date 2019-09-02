@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "usr")
@@ -28,6 +29,13 @@ public class User implements UserDetails {
 
     @NonNull
     private boolean enable;
+
+    @OneToMany(targetEntity = Message.class, mappedBy = "userId", orphanRemoval = false, fetch = FetchType.LAZY)
+    protected Set<Message> messages;
+
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "user", orphanRemoval = false, fetch = FetchType.LAZY)
+    protected Set<RoomUserRole> roomUserRoles;
+
 
 
     @Override
