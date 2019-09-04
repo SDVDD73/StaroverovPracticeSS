@@ -17,8 +17,8 @@
             <!--/*@thymesVar id="username" type=""*/-->
             <span >Ваш логин: </span>
             <span id="username" th:utext="${username}">Ваш логин: </span>
-            <form>
-                <input type="button" value="Назад" onclick="history.back()">
+            <form th:action="@{/homeUser}" method="get">
+                <input type="submit" value="Выйти из чата">
             </form>
         </div>
         <h3>Чат SS</h3>

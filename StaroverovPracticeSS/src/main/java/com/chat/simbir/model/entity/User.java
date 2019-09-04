@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -22,6 +22,7 @@ public class User implements UserDetails {
     private long id;
 
     @NonNull
+    @Column(unique = true)
     private String username;
 
     @NonNull
@@ -30,7 +31,7 @@ public class User implements UserDetails {
     @NonNull
     private boolean enable;
 
-    @OneToMany(targetEntity = Message.class, mappedBy = "userId", orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Message.class, mappedBy = "user", orphanRemoval = false, fetch = FetchType.LAZY)
     protected Set<Message> messages;
 
     @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "user", orphanRemoval = false, fetch = FetchType.LAZY)

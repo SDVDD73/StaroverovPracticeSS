@@ -36,7 +36,7 @@ function enterRoom(newRoomId) {
     topic = `/app/chat/${newRoomId}`;
 
     if (currentSubscription) {
-        currentSubscription.unsubscribe();//TODO пока хрен знает для чего это
+        currentSubscription.unsubscribe();
     }
     currentSubscription = stompClient.subscribe(`/channel/${newRoomId}`, onMessageReceived);
 

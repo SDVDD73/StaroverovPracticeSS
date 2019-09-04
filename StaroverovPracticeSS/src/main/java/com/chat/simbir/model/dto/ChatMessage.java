@@ -1,4 +1,4 @@
-package com.chat.simbir.model.entity;
+package com.chat.simbir.model.dto;
 
 import lombok.*;
 

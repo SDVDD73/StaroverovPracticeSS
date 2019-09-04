@@ -11,8 +11,7 @@ import javax.persistence.*;
 public enum Role implements GrantedAuthority {
     USER,
     ADMIN,
-    MODERATOR,
-    DELETE;
+    MODERATOR;
 
     @Override
     public String getAuthority() {

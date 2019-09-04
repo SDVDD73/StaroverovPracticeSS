@@ -48,8 +48,14 @@ public class UserService implements UserDetailsService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
     @Transactional
     public List<String> getRolesOfUserFromRoom(Long roomId, Long userId){
         return userRepository.roleFromRoom(roomId, userId);
+    }
+
+    @Transactional
+    public List<Long> getSubscriptionsRoomsOfUser(long userId) {
+       return userRepository.getSubscriptionsRoomsofUser(userId);
     }
 }

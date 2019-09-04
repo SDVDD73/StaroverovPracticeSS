@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
+@RequiredArgsConstructor
 @NoArgsConstructor
 public class Room {
 
@@ -23,10 +23,10 @@ public class Room {
     @NonNull
     private boolean enable;
 
-    @OneToMany(targetEntity = Message.class, mappedBy = "room", orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Message.class, mappedBy = "room", orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Message> messages;
 
-    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "room", orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "room", orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<RoomUserRole> roomUserRoles;
 
 }
