@@ -43,7 +43,7 @@ public class testBD {
     @Test
     @Transactional
     public void givenUsersInDB_WhenUpdateStatusForNameModifyingQueryAnnotationNative_ThenModifyMatchingUsers() {
-        List<Long> updatedUsersSize = roomUserRoleRepository.isUserofRoom(1, 1);
+        List<Long> updatedUsersSize = roomUserRoleRepository.searchByIdUserAndIdRoom(1, 1);
         //assertThat(updatedUsersSize).isEqualTo(2);
 
     }

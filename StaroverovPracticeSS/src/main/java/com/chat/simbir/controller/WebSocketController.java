@@ -1,5 +1,6 @@
 package com.chat.simbir.controller;
 
+import com.chat.simbir.constant.Constants;
 import com.chat.simbir.model.dto.ChatMessage;
 import com.chat.simbir.model.entity.Message;
 import com.chat.simbir.model.entity.Room;
@@ -76,6 +77,8 @@ public class WebSocketController {
     }
 
     private Message createMessage(@DestinationVariable String roomId, @Payload ChatMessage chatMessage) {
+
+       //TODO: проблема с паблик чатом приходит имя Publicchat, а должен номер комнаты
         Room room = roomService.getByRoom((Long.valueOf(roomId)));
         User user = userService.getByUser(chatMessage.getSender());
 

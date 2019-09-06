@@ -1,6 +1,8 @@
 package com.chat.simbir.controller;
 
-import com.chat.simbir.model.entity.User;
+import com.chat.simbir.model.entity.*;
+import com.chat.simbir.service.RolesService;
+import com.chat.simbir.service.RoomUserRepositoruService;
 import com.chat.simbir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,12 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    RoomUserRepositoruService roomUserRepositoruService;
+
+    @Autowired
+    RolesService rolesServices;
+
     @RequestMapping(path = "/logout")
     public String logout(HttpServletRequest request) {
         request.getSession(true).invalidate();
@@ -31,23 +39,48 @@ public class LoginController {
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
-        com.chat.simbir.model.entity.User userFromDB = userService.getByUser(user.getUsername());
+        User userFromDB = userService.getByUser(user.getUsername());
 
-        if (userFromDB != null) {
-            model.put("message", "Юзер существует");
-            return "/registration";
-        }
+        if (isExistingUser(model, userFromDB)) return "/registration";
 
+        if (isNotValidationPassword(user, model)) return "/registration";
+
+        user.setEnable(true);
+        //user.setRoles(Collections.singleton(Role.USER));
+        userService.addUser(user);
+
+        addUserPublicRoom(user);
+
+        return "redirect:/login";
+
+    }
+
+    private boolean isNotValidationPassword(User user, Map<String, Object> model) {
         if (!validationPassword(user.getPassword())) {
             model.put("message", "введи нормальный пароль негодяй");
-            return "/registration";
+            return true;
         }
-            user.setEnable(true);
-            //user.setRoles(Collections.singleton(Role.USER));
-            userService.addUser(user);
+        return false;
+    }
 
-            return "redirect:/login";
+    private boolean isExistingUser(Map<String, Object> model, User userFromDB) {
+        if (userFromDB != null) {
+            model.put("message", "Юзер существует");
+            return true;
+        }
+        return false;
+    }
 
+    private void addUserPublicRoom(User user) {
+        Roles role = rolesServices.findByRole(Role.USER);
+        int idPublicRoom = 1;
+
+        RoomUserRole roomUserRole = new RoomUserRole(user,
+                new Roles(role.getId()),
+                new Room(idPublicRoom),
+                true);
+
+        roomUserRepositoruService.save(roomUserRole);
     }
 
     private boolean validationPassword(String password) {

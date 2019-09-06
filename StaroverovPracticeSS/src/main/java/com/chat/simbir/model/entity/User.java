@@ -17,6 +17,10 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class User implements UserDetails {
 
+    public User(long id){
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -31,12 +35,11 @@ public class User implements UserDetails {
     @NonNull
     private boolean enable;
 
-    @OneToMany(targetEntity = Message.class, mappedBy = "user", orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Message.class, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     protected Set<Message> messages;
 
-    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "user", orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
     protected Set<RoomUserRole> roomUserRoles;
-
 
 
     @Override

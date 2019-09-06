@@ -12,6 +12,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class Room {
 
+    public Room(long id){
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -23,10 +27,10 @@ public class Room {
     @NonNull
     private boolean enable;
 
-    @OneToMany(targetEntity = Message.class, mappedBy = "room", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Message.class, mappedBy = "room", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Message> messages;
 
-    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "room", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "room", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RoomUserRole> roomUserRoles;
 
 }

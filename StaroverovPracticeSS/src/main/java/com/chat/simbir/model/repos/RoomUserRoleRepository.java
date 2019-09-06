@@ -16,6 +16,8 @@ public interface RoomUserRoleRepository  extends JpaRepository<RoomUserRole, Lon
 
     @Query("select rur.role.id from RoomUserRole rur " +
             "where rur.user.id = ?1 and rur.room.id = ?2 and rur.enable = true")
-    List<Long> isUserofRoom(long idUser, long idRoom);
+    List<Long> searchByIdUserAndIdRoom(long idUser, long idRoom);
+
+
 
 }

@@ -1,6 +1,8 @@
 package com.chat.simbir.model.repos;
 
 
+import com.chat.simbir.model.entity.Room;
+import com.chat.simbir.model.entity.RoomUserRole;
 import com.chat.simbir.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,10 +21,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<String> roleFromRoom(long roomId, long userId);
 
 
-    @Query("select distinct rur.room.id from User u " +
+    @Query("select distinct rur.room from User u " +
             "join u.roomUserRoles rur on rur.user.id = u.id " +
             "where rur.enable = true and u.id = ?1")
-    List<Long> getSubscriptionsRoomsofUser(long userId);
+    List<Room> getSubscriptionsRoomsofUsers(long userId);
 
     List<User> findByEnable(Boolean aBoolean);
 }

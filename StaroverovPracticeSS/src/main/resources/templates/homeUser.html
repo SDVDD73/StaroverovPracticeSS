@@ -13,15 +13,12 @@
     </form>
 </div>
 <div>
-<a th:href ="@{/publicChat}">Публичный чат</a>
-</div>
-<div>
 <table>
-<!--<tr th:if="${subscriptionsUser.empty}">
+<tr th:if="${linkOfChat.empty}">
     <td colspan="2"> Вы не подписаны не на один чат </td>
-</tr>-->
-<tr th:each="room : ${subscriptionsOnRoomOfUser}">
-    <td><a th:href="@{${room}}" th:text="${room}"> Title </a></td>
+</tr>
+<tr th:each="chat : ${linkOfChat}">
+    <td><a th:href="@{${chat.value1}}" th:text="${chat.value2}"> Title </a></td>
 </tr>
 </table>
 </div>

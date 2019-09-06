@@ -1,5 +1,6 @@
 package com.chat.simbir.service;
 
+import com.chat.simbir.model.entity.Room;
 import com.chat.simbir.model.entity.User;
 import com.chat.simbir.model.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public List<Long> getSubscriptionsRoomsOfUser(long userId) {
-       return userRepository.getSubscriptionsRoomsofUser(userId);
+    public List<Room> getSubscriptionsRoomsOfUser(long userId) {
+       return userRepository.getSubscriptionsRoomsofUsers(userId);
     }
 }
