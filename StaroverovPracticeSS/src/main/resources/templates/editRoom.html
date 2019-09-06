@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание конаты</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+</head>
+<body>
+<div>
+    <form th:action="@{/editRoom}" method="post">
+        <label> Введите название чата: <input type="nameChat" name="roomName"/> </label>
+        <input type="submit" value="Создать"/>
+    </form>
+
+    <a
+            th:text="${nameCreatedRoom}">
+
+    </a>
+
+    <form th:action="@{/homeUser}" method="get">
+        <input type="submit" value="На домашнюю страницу">
+    </form>
+
+    <div th:insert="~{parts/footer :: copy}"></div>
+</div>
+</body>
+</html>

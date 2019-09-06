@@ -2,9 +2,6 @@ package com.chat.simbir.controller;
 
 import com.chat.simbir.model.dto.DtoTwoString;
 import com.chat.simbir.model.entity.*;
-import com.chat.simbir.model.repos.UserRepository;
-import com.chat.simbir.service.RoomService;
-import com.chat.simbir.service.RoomUserRepositoruService;
 import com.chat.simbir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,8 +26,6 @@ public class HomeUserController {
         List<DtoTwoString> linksOnChatsAndNameChats = makeLinksOnChat(subscriptionsOnRoomsOfUser);
 
         model.addAttribute("linkOfChat", linksOnChatsAndNameChats);
-
-
 
         return "homeUser";
     }

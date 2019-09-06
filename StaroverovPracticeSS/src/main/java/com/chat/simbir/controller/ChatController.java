@@ -2,7 +2,7 @@ package com.chat.simbir.controller;
 
 import com.chat.simbir.model.entity.User;
 import com.chat.simbir.service.RoomService;
-import com.chat.simbir.service.RoomUserRepositoruService;
+import com.chat.simbir.service.RoomUserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ChatController {
 
     @Autowired
-    RoomUserRepositoruService roomUserRepositoruService;
+    RoomUserRoleService roomUserRepositoruService;
 
     @Autowired
     RoomService roomService;

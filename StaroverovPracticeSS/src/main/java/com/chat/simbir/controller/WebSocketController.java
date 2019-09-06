@@ -78,7 +78,6 @@ public class WebSocketController {
 
     private Message createMessage(@DestinationVariable String roomId, @Payload ChatMessage chatMessage) {
 
-       //TODO: проблема с паблик чатом приходит имя Publicchat, а должен номер комнаты
         Room room = roomService.getByRoom((Long.valueOf(roomId)));
         User user = userService.getByUser(chatMessage.getSender());
 

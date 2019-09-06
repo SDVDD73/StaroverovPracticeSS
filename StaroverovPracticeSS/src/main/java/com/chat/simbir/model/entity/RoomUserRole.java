@@ -33,8 +33,7 @@ public class RoomUserRole {
     @NonNull
     private Room room;
 
-    @NonNull
     @Column
+    @NonNull
     private boolean enable;
-
 }

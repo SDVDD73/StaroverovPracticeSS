@@ -1,3 +1,5 @@
+package com.chat.simbir;
+
 import com.chat.simbir.model.repos.RoomUserRoleRepository;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -9,7 +11,6 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.List;
@@ -41,8 +42,7 @@ public class testBD {
     RoomUserRoleRepository roomUserRoleRepository;
 
     @Test
-    @Transactional
-    public void givenUsersInDB_WhenUpdateStatusForNameModifyingQueryAnnotationNative_ThenModifyMatchingUsers() {
+    public void testingDB() {
         List<Long> updatedUsersSize = roomUserRoleRepository.searchByIdUserAndIdRoom(1, 1);
         //assertThat(updatedUsersSize).isEqualTo(2);
 

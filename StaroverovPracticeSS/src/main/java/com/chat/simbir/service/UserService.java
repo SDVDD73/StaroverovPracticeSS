@@ -1,7 +1,6 @@
 package com.chat.simbir.service;
 
-import com.chat.simbir.model.entity.Room;
-import com.chat.simbir.model.entity.User;
+import com.chat.simbir.model.entity.*;
 import com.chat.simbir.model.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +17,12 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    RolesService rolesService;
+
+    @Autowired
+    RoomUserRoleService roomUserRoleService;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,6 +33,20 @@ public class UserService implements UserDetailsService {
     public User addUser(User user) {
         User saveUser = userRepository.save(user);
         return saveUser;
+    }
+
+    public void addUserWithRoom(User user, long idRoom){
+
+        userRepository.save(user);
+
+        Roles role = rolesService.findByRole(Role.USER);
+
+        RoomUserRole roomUserRole = new RoomUserRole(user,
+                new Roles(role.getId()),
+                new Room(idRoom),
+                true);
+
+        roomUserRoleService.save(roomUserRole);
     }
 
     @Transactional

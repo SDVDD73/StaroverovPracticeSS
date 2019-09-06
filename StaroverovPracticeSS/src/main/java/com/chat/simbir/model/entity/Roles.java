@@ -14,21 +14,21 @@ import java.util.Set;
 @NoArgsConstructor
 public class Roles {
 
-public Roles(long id){
+    public Roles(long id) {
         this.id = id;
-        }
+    }
 
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
-private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-@Column(name = "role_name", unique = true)
-@Enumerated(EnumType.STRING)
-@NonNull
-private Role role;
+    @Column(name = "role_name", unique = true)
+    @Enumerated(EnumType.STRING)
+    @NonNull
+    private Role role;
 
-@OneToMany(targetEntity = RoomUserRole.class, mappedBy = "role", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-protected Set<RoomUserRole> roomUserRoles;
+    @OneToMany(targetEntity = RoomUserRole.class, mappedBy = "role", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    protected Set<RoomUserRole> roomUserRoles;
 
 
-        }
+}

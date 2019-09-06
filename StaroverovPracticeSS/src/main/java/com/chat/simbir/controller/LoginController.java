@@ -1,8 +1,9 @@
 package com.chat.simbir.controller;
 
+import com.chat.simbir.constant.Constants;
 import com.chat.simbir.model.entity.*;
 import com.chat.simbir.service.RolesService;
-import com.chat.simbir.service.RoomUserRepositoruService;
+import com.chat.simbir.service.RoomUserRoleService;
 import com.chat.simbir.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    RoomUserRepositoruService roomUserRepositoruService;
+    RoomUserRoleService RoomUserRoleService;
 
     @Autowired
     RolesService rolesServices;
@@ -46,10 +47,10 @@ public class LoginController {
         if (isNotValidationPassword(user, model)) return "/registration";
 
         user.setEnable(true);
-        //user.setRoles(Collections.singleton(Role.USER));
-        userService.addUser(user);
 
-        addUserPublicRoom(user);
+
+        userService.addUserWithRoom(user, Constants.ID_PUBLIC_ROOM);
+
 
         return "redirect:/login";
 
@@ -80,7 +81,7 @@ public class LoginController {
                 new Room(idPublicRoom),
                 true);
 
-        roomUserRepositoruService.save(roomUserRole);
+        RoomUserRoleService.save(roomUserRole);
     }
 
     private boolean validationPassword(String password) {
